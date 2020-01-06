@@ -92,6 +92,10 @@ DoubleLiteral
      )
     ;
 
+IntLiteral
+    : (IntegerLiteral | HexLiteral | BinLiteral)
+    ;
+
 LongLiteral
     : (IntegerLiteral | HexLiteral | BinLiteral) 'L'
     ;
@@ -206,6 +210,310 @@ fragment Letter
     | UNICODE_CLASS_LU
     | UNICODE_CLASS_NL
     ;
+
+NOP: 'nop' ;
+ACONST_NULL: 'aconst_null' ;
+ICONST_M1: 'iconst_m1' ;
+ICONST_0: 'iconst_0' ;
+ICONST_1: 'iconst_1' ;
+ICONST_2: 'iconst_2' ;
+ICONST_3: 'iconst_3' ;
+ICONST_4: 'iconst_4' ;
+ICONST_5: 'iconst_5' ;
+LCONST_0: 'lconst_0' ;
+LCONST_1: 'lconst_1' ;
+FCONST_0: 'fconst_0' ;
+FCONST_1: 'fconst_1' ;
+FCONST_2: 'fconst_2' ;
+DCONST_0: 'dconst_0' ;
+DCONST_1: 'dconst_1' ;
+BIPUSH: 'bipush' ;
+SIPUSH: 'sipush' ;
+LDC: 'ldc' ;
+LDC_W: 'ldc_w' ;
+LDC2_W: 'ldc2_w' ;
+ILOAD: 'iload' ;
+LLOAD: 'lload' ;
+FLOAD: 'fload' ;
+DLOAD: 'dload' ;
+ALOAD: 'aload' ;
+IALOAD: 'iaload' ;
+LALOAD: 'laload' ;
+FALOAD: 'faload' ;
+DALOAD: 'daload' ;
+AALOAD: 'aaload' ;
+BALOAD: 'baload' ;
+CALOAD: 'caload' ;
+SALOAD: 'saload' ;
+ISTORE: 'istore' ;
+LSTORE: 'lstore' ;
+FSTORE: 'fstore' ;
+DSTORE: 'dstore' ;
+ASTORE: 'astore' ;
+IASTORE: 'iastore' ;
+LASTORE: 'lastore' ;
+FASTORE: 'fastore' ;
+DASTORE: 'dastore' ;
+AASTORE: 'aastore' ;
+BASTORE: 'bastore' ;
+CASTORE: 'castore' ;
+SASTORE: 'sastore' ;
+POP: 'pop' ;
+POP2: 'pop2' ;
+DUP: 'dup' ;
+DUP_X1: 'dup_x1' ;
+DUP_X2: 'dup_x2' ;
+DUP2: 'dup2' ;
+DUP2_X1: 'dup2_x1' ;
+DUP2_X2: 'dup2_x2' ;
+SWAP: 'swap' ;
+IADD: 'iadd' ;
+LADD: 'ladd' ;
+FADD: 'fadd' ;
+DADD: 'dadd' ;
+ISUB: 'isub' ;
+LSUB: 'lsub' ;
+FSUB: 'fsub' ;
+DSUB: 'dsub' ;
+IMUL: 'imul' ;
+LMUL: 'lmul' ;
+FMUL: 'fmul' ;
+DMUL: 'dmul' ;
+IDIV: 'idiv' ;
+LDIV: 'ldiv' ;
+FDIV: 'fdiv' ;
+DDIV: 'ddiv' ;
+IREM: 'irem' ;
+LREM: 'lrem' ;
+FREM: 'frem' ;
+DREM: 'drem' ;
+INEG: 'ineg' ;
+LNEG: 'lneg' ;
+FNEG: 'fneg' ;
+DNEG: 'dneg' ;
+ISHL: 'ishl' ;
+LSHL: 'lshl' ;
+ISHR: 'ishr' ;
+LSHR: 'lshr' ;
+IUSHR: 'iushr' ;
+LUSHR: 'lushr' ;
+IAND: 'iand' ;
+LAND: 'land' ;
+IOR: 'ior' ;
+LOR: 'lor' ;
+IXOR: 'ixor' ;
+LXOR: 'lxor' ;
+IINC: 'iinc' ;
+I2L: 'i2l' ;
+I2F: 'i2f' ;
+I2D: 'i2d' ;
+L2I: 'l2i' ;
+L2F: 'l2f' ;
+L2D: 'l2d' ;
+F2I: 'f2i' ;
+F2L: 'f2l' ;
+F2D: 'f2d' ;
+D2I: 'd2i' ;
+D2L: 'd2l' ;
+D2F: 'd2f' ;
+I2B: 'i2b' ;
+I2C: 'i2c' ;
+I2S: 'i2s' ;
+LCMP: 'lcmp' ;
+FCMPL: 'fcmpl' ;
+FCMPG: 'fcmpg' ;
+DCMPL: 'dcmpl' ;
+DCMPG: 'dcmpg' ;
+IFEQ: 'ifeq' ;
+IFNE: 'ifne' ;
+IFLT: 'iflt' ;
+IFGE: 'ifge' ;
+IFGT: 'ifgt' ;
+IFLE: 'ifle' ;
+IF_ICMPEQ: 'if_icmpeq' ;
+IF_ICMPNE: 'if_icmpne' ;
+IF_ICMPLT: 'if_icmplt' ;
+IF_ICMPGE: 'if_icmpge' ;
+IF_ICMPGT: 'if_icmpgt' ;
+IF_ICMPLE: 'if_icmple' ;
+IF_ACMPEQ: 'if_acmpeq' ;
+IF_ACMPNE: 'if_acmpne' ;
+GOTO: 'goto' ;
+JSR: 'jsr' ;
+RET: 'ret' ;
+TABLESWITCH: 'tableswitch' ;
+LOOKUPSWITCH: 'lookupswitch' ;
+IRETURN: 'ireturn' ;
+LRETURN: 'lreturn' ;
+FRETURN: 'freturn' ;
+DRETURN: 'dreturn' ;
+ARETURN: 'areturn' ;
+RETURN: 'return' ;
+GETSTATIC: 'getstatic' ;
+PUTSTATIC: 'putstatic' ;
+GETFIELD: 'getfield' ;
+PUTFIELD: 'putfield' ;
+INVOKEVIRTUAL: 'invokevirtual' ;
+INVOKESPECIAL: 'invokespecial' ;
+INVOKESTATIC: 'invokestatic' ;
+INVOKEINTERFACE: 'invokeinterface' ;
+INVOKEDYNAMIC: 'invokedynamic' ;
+NEW: 'new' ;
+NEWARRAY: 'newarray' ;
+ANEWARRAY: 'anewarray' ;
+ARRAYLENGTH: 'arraylength' ;
+ATHROW: 'athrow' ;
+CHECKCAST: 'checkcast' ;
+INSTANCEOF: 'instanceof' ;
+MONITORENTER: 'monitorenter' ;
+MONITOREXIT: 'monitorexit' ;
+MULTIANEWARRAY: 'multianewarray' ;
+IFNULL: 'ifnull' ;
+IFNONNULL: 'ifnonnull' ;
+
+fragment ConstantInstruction
+    : ACONST_NULL
+    | ICONST_M1
+    | ICONST_0
+    | ICONST_1
+    | ICONST_2
+    | ICONST_3
+    | ICONST_4
+    | ICONST_5
+    | LCONST_0
+    | LCONST_1
+    | FCONST_0
+    | FCONST_1
+    | FCONST_2
+    | DCONST_0
+    | DCONST_1
+    ;
+
+fragment ArrayLoadInstruction
+    : IALOAD
+    | LALOAD
+    | FALOAD
+    | DALOAD
+    | AALOAD
+    | BALOAD
+    | CALOAD
+    | SALOAD
+    ;
+
+fragment ArrayStoreInstruction
+    : IASTORE
+    | LASTORE
+    | FASTORE
+    | DASTORE
+    | AASTORE
+    | BASTORE
+    | CASTORE
+    | SASTORE
+    ;
+
+fragment StackManipulationInstruction
+    : POP
+    | POP2
+    | DUP
+    | DUP_X1
+    | DUP_X2
+    | DUP2
+    | DUP2_X1
+    | DUP2_X2
+    | SWAP
+    ;
+
+fragment ArithmeticInstruction
+    : IADD
+    | LADD
+    | FADD
+    | DADD
+    | ISUB
+    | LSUB
+    | FSUB
+    | DSUB
+    | IMUL
+    | LMUL
+    | FMUL
+    | DMUL
+    | IDIV
+    | LDIV
+    | FDIV
+    | DDIV
+    | IREM
+    | LREM
+    | FREM
+    | DREM
+    | INEG
+    | LNEG
+    | FNEG
+    | DNEG
+    | ISHL
+    | LSHL
+    | ISHR
+    | LSHR
+    | IUSHR
+    | LUSHR
+    | IAND
+    | LAND
+    | IOR
+    | LOR
+    | IXOR
+    | LXOR
+    ;
+
+fragment ConversionInstruction
+    : I2L
+    | I2F
+    | I2D
+    | L2I
+    | L2F
+    | L2D
+    | F2I
+    | F2L
+    | F2D
+    | D2I
+    | D2L
+    | D2F
+    | I2B
+    | I2C
+    | I2S
+    ;
+
+fragment ComparisonInstruction
+    : LCMP
+    | FCMPL
+    | FCMPG
+    | DCMPL
+    | DCMPG
+    ;
+
+fragment ReturnInstruction
+    : IRETURN
+    | LRETURN
+    | FRETURN
+    | DRETURN
+    | ARETURN
+    | RETURN
+    ;
+
+SimpleInstruction
+    : NOP
+    | ConstantInstruction
+    | ArrayLoadInstruction
+    | ArrayStoreInstruction
+    | StackManipulationInstruction
+    | ArithmeticInstruction
+    | ComparisonInstruction
+    | ReturnInstruction
+    | MONITORENTER | MONITOREXIT
+    ;
+
+ImmediateIntPushInstruction
+    : (BIPUSH | SIPUSH) IntLiteral
+    ;
+
+
 
 
 mode Inside ;

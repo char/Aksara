@@ -38,7 +38,11 @@ methodDeclaration
     ;
 
 instruction
-    : PRIVATE
+    : NOP
+    | ConstantInstruction
+    | BIPUSH IntLiteral
+    | SIPUSH IntLiteral
+    |
     ;
 
 methodBody
