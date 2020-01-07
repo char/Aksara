@@ -1,5 +1,6 @@
 package codes.som.anthony.aksara.output
 
+import codes.som.anthony.aksara.ast.AnnotationType
 import codes.som.anthony.aksara.ast.ConstantASTNode
 import codes.som.anthony.aksara.ast.ConstantASTNode.*
 import org.objectweb.asm.Type
@@ -16,12 +17,7 @@ object MethodElement : OutputElement()
 object MethodSignature : OutputElement()
 object FieldElement: OutputElement()
 
-class AnnotationElement(val annotationType: AnnotationType) : OutputElement() {
-    enum class AnnotationType {
-        BINARY,
-        RUNTIME
-    }
-}
+class AnnotationElement(val annotationType: AnnotationType) : OutputElement()
 
 sealed class KeywordElement : OutputElement() {
     object Import : KeywordElement()

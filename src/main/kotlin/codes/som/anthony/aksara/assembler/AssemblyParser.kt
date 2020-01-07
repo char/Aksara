@@ -22,6 +22,7 @@ fun main() {
     """.trimIndent()))
 
     val parser = AksaraParser(CommonTokenStream(lexer))
-    val file = parser.aksaraFile().toAST()
-    println(file)
+    val file = parser.aksaraFile()
+    val prog = file.toAST()
+    println(prog)
 }

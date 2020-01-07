@@ -247,4 +247,104 @@ public interface AksaraParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitModifier(AksaraParser.ModifierContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AksaraParser#intLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntLiteral(AksaraParser.IntLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AksaraParser#intLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntLiteral(AksaraParser.IntLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AksaraParser#longLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void enterLongLiteral(AksaraParser.LongLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AksaraParser#longLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void exitLongLiteral(AksaraParser.LongLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AksaraParser#floatLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void enterFloatLiteral(AksaraParser.FloatLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AksaraParser#floatLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void exitFloatLiteral(AksaraParser.FloatLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AksaraParser#doubleLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void enterDoubleLiteral(AksaraParser.DoubleLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AksaraParser#doubleLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void exitDoubleLiteral(AksaraParser.DoubleLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AksaraParser#characterLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void enterCharacterLiteral(AksaraParser.CharacterLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AksaraParser#characterLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void exitCharacterLiteral(AksaraParser.CharacterLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AksaraParser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void enterLiteral(AksaraParser.LiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AksaraParser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void exitLiteral(AksaraParser.LiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AksaraParser#annotationList}.
+	 * @param ctx the parse tree
+	 */
+	void enterAnnotationList(AksaraParser.AnnotationListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AksaraParser#annotationList}.
+	 * @param ctx the parse tree
+	 */
+	void exitAnnotationList(AksaraParser.AnnotationListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AksaraParser#annotationType}.
+	 * @param ctx the parse tree
+	 */
+	void enterAnnotationType(AksaraParser.AnnotationTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AksaraParser#annotationType}.
+	 * @param ctx the parse tree
+	 */
+	void exitAnnotationType(AksaraParser.AnnotationTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AksaraParser#annotationArgument}.
+	 * @param ctx the parse tree
+	 */
+	void enterAnnotationArgument(AksaraParser.AnnotationArgumentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AksaraParser#annotationArgument}.
+	 * @param ctx the parse tree
+	 */
+	void exitAnnotationArgument(AksaraParser.AnnotationArgumentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AksaraParser#annotation}.
+	 * @param ctx the parse tree
+	 */
+	void enterAnnotation(AksaraParser.AnnotationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AksaraParser#annotation}.
+	 * @param ctx the parse tree
+	 */
+	void exitAnnotation(AksaraParser.AnnotationContext ctx);
 }

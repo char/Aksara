@@ -26,6 +26,7 @@ COMMA: ',' ;
 SINGLE_QUOTE: '\'' ;
 COLON: ':' ;
 SEMICOLON: ';' ;
+EQUALS: '=' ;
 
 LPAREN: '(' -> pushMode(Inside) ;
 RPAREN: ')' ;
@@ -35,10 +36,13 @@ LCURL: '{' ;
 RCURL: '}' ;
 LANG: '<' ;
 RANG: '>' ;
+AT_SYMBOL: '@' ;
 
 // KEYWORDS
 
 IMPORT: 'import' ;
+BINARY: 'BINARY' ;
+RUNTIME: 'RUNTIME' ;
 
 // ACCESS MODIFIERS
 
@@ -71,16 +75,11 @@ MODULE: 'module' ;
 QUOTE_OPEN: '"' -> pushMode(LineString) ;
 TRIPLE_QUOTE_OPEN: '"""' -> pushMode(MultiLineString) ;
 
+FLOAT_TRAILER: 'F' ;
+LONG_TRAILER: 'L' ;
+DOUBLE_TRAILER: 'D' ;
+
 RealLiteral
-    : FloatLiteral
-    | DoubleLiteral
-    ;
-
-FloatLiteral
-    : (DoubleLiteral | IntegerLiteral) [fF]
-    ;
-
-DoubleLiteral
     : ( (DecDigitNoZero DecDigit*)? '.'
       | (DecDigitNoZero (DecDigit | '_')* DecDigit)? '.')
      ( DecDigit+
@@ -90,14 +89,6 @@ DoubleLiteral
       | DecDigit (DecDigit | '_')+ DecDigit [eE] ('+' | '-')? DecDigit+
       | DecDigit (DecDigit | '_')+ DecDigit [eE] ('+' | '-')? DecDigit (DecDigit | '_')+ DecDigit
      )
-    ;
-
-IntLiteral
-    : (IntegerLiteral | HexLiteral | BinLiteral)
-    ;
-
-LongLiteral
-    : (IntegerLiteral | HexLiteral | BinLiteral) 'L'
     ;
 
 IntegerLiteral
@@ -185,8 +176,13 @@ Identifier
     | '`' ~('`')+ '`'
     ;
 
+
 CharacterLiteral
-    : '\'' (EscapeSeq | .) '\''
+    : SINGLE_QUOTE (.) SINGLE_QUOTE
+    ;
+
+EscapedCharacterLiteral
+    : SINGLE_QUOTE EscapeSeq SINGLE_QUOTE
     ;
 
 fragment EscapeSeq
@@ -510,10 +506,9 @@ SimpleInstruction
     ;
 
 ImmediateIntPushInstruction
-    : (BIPUSH | SIPUSH) IntLiteral
+    : BIPUSH
+    | SIPUSH
     ;
-
-
 
 
 mode Inside ;
@@ -523,6 +518,12 @@ Inside_RSQUARE: ']' -> popMode, type(RSQUARE);
 
 Inside_LPAREN: LPAREN -> pushMode(Inside), type(LPAREN) ;
 Inside_LSQUARE: LSQUARE -> pushMode(Inside), type(LSQUARE) ;
+
+Inside_AT_SYMBOL: AT_SYMBOL -> type(AT_SYMBOL) ;
+Inside_EQUALS: EQUALS -> type(EQUALS) ;
+
+Inside_BINARY: BINARY -> type(BINARY) ;
+Inside_RUNTIME: RUNTIME -> type(RUNTIME) ;
 
 Inside_LCURL: LCURL -> type(LCURL) ;
 Inside_RCURL: RCURL -> type(RCURL) ;
@@ -563,9 +564,6 @@ Inside_IntegerLiteral: IntegerLiteral -> type(IntegerLiteral) ;
 Inside_HexLiteral: HexLiteral -> type(HexLiteral) ;
 Inside_BinLiteral: BinLiteral -> type(BinLiteral) ;
 Inside_CharacterLiteral: CharacterLiteral -> type(CharacterLiteral) ;
-Inside_RealLiteral: RealLiteral -> type(RealLiteral) ;
-
-Inside_LongLiteral: LongLiteral -> type(LongLiteral) ;
 
 Inside_Identifier: Identifier -> type(Identifier) ;
 Inside_Comment: (LineComment | DelimitedComment) -> channel(HIDDEN) ;

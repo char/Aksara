@@ -19,9 +19,10 @@ fun MethodDeclarationContext.toAST(imports: List<ImportDeclaration>): MethodASTN
     val (returnType, parameterTypes) = methodSignature().toAST(imports)
 
     return MethodASTNode(access, name, returnType, parameterTypes).apply {
-        val (code, tryCatchBlocks) = methodBody().toAST()
-        this.code = code
-        this.tryCatchBlocks.addAll(tryCatchBlocks)
+        methodBody()?.toAST()?.let { (code, tryCatchBlocks) ->
+            this.code = code
+            this.tryCatchBlocks.addAll(tryCatchBlocks)
+        }
     }
 }
 

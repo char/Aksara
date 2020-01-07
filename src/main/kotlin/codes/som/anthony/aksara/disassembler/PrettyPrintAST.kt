@@ -3,10 +3,9 @@ package codes.som.anthony.aksara.disassembler
 import codes.som.anthony.aksara.ast.AnnotatableElement
 import codes.som.anthony.aksara.ast.AksaraASTProgram
 import codes.som.anthony.aksara.ast.AnnotationASTNode
+import codes.som.anthony.aksara.ast.AnnotationType
+import codes.som.anthony.aksara.ast.AnnotationType.*
 import codes.som.anthony.aksara.output.*
-import codes.som.anthony.aksara.output.AnnotationElement.AnnotationType
-import codes.som.anthony.aksara.output.AnnotationElement.AnnotationType.BINARY
-import codes.som.anthony.aksara.output.AnnotationElement.AnnotationType.RUNTIME
 
 fun writeAnnotation(prog: AksaraASTProgram, anno: AnnotationASTNode, annotationType: AnnotationType, output: Output) {
     output.begin(AnnotationElement(annotationType))

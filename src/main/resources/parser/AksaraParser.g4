@@ -22,11 +22,11 @@ classDeclarations
     ;
 
 classDeclaration
-    : modifierList type (LCURL NL* classBody NL* RCURL)?
+    : (annotationList NL+)? modifierList type (LCURL NL* classBody NL* RCURL)?
     ;
 
 fieldDeclaration
-    : modifierList identifier COLON type
+    : (annotationList NL+)? modifierList identifier COLON type
     ;
 
 methodSignature
@@ -34,19 +34,16 @@ methodSignature
     ;
 
 methodDeclaration
-    : modifierList identifier methodSignature (NL* LCURL NL* methodBody NL* RCURL)?
+    : (annotationList NL+)? modifierList identifier methodSignature (NL* LCURL NL* methodBody NL* RCURL)?
     ;
 
 instruction
-    : NOP
-    | ConstantInstruction
-    | BIPUSH IntLiteral
-    | SIPUSH IntLiteral
-    |
+    : SimpleInstruction
+    | (ImmediateIntPushInstruction intLiteral)
     ;
 
 methodBody
-    : instruction (NL* instruction)*
+    : instruction (semi instruction)*
     ;
 
 classBody
@@ -123,4 +120,52 @@ modifier
     | ENUM
     | MANDATED
     | MODULE
+    ;
+
+intLiteral
+    : (IntegerLiteral | HexLiteral | BinLiteral)
+    ;
+
+longLiteral
+    : (IntegerLiteral | HexLiteral | BinLiteral) LONG_TRAILER
+    ;
+
+floatLiteral
+    : (RealLiteral | IntegerLiteral) FLOAT_TRAILER
+    ;
+
+doubleLiteral
+    : RealLiteral
+    | (IntegerLiteral DOUBLE_TRAILER)
+    ;
+
+characterLiteral
+    : CharacterLiteral
+    | EscapedCharacterLiteral
+    ;
+
+literal
+    : stringLiteral
+    | intLiteral
+    | longLiteral
+    | floatLiteral
+    | doubleLiteral
+    | characterLiteral
+    | type
+    ;
+
+annotationList
+    : annotation (anysemi annotation)*
+    ;
+
+annotationType
+    : (BINARY | RUNTIME)
+    ;
+
+annotationArgument
+    : identifier EQUALS literal
+    ;
+
+annotation
+    : AT_SYMBOL type LPAREN annotationType (COMMA annotationArgument)* RPAREN
     ;
