@@ -28,11 +28,8 @@ fun writeAnnotation(prog: AksaraASTProgram, anno: AnnotationASTNode, annotationT
 }
 
 fun writeAnnotations(prog: AksaraASTProgram, elem: AnnotatableElement, output: Output) {
-    for (anno in elem.binaryAnnotations)
-        writeAnnotation(prog, anno, BINARY, output)
-
-    for (anno in elem.runtimeAnnotations)
-        writeAnnotation(prog, anno, RUNTIME, output)
+    for (anno in elem.annotations)
+        writeAnnotation(prog, anno, anno.annotationType, output)
 }
 
 fun writeAST(prog: AksaraASTProgram, output: Output) {

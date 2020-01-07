@@ -9,5 +9,9 @@ fun FieldDeclarationContext.toAST(imports: List<ImportDeclaration>): FieldASTNod
     val name = identifier().toAST()
     val type = type().toAST(imports)
 
-    return FieldASTNode(access, name, type)
+    return FieldASTNode(access, name, type).apply {
+        annotationList()?.annotation()?.map { it.toAST(imports) }?.let { annotations ->
+            this.annotations.addAll(annotations)
+        }
+    }
 }

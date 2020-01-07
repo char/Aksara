@@ -41,6 +41,10 @@ fun ClassDeclarationContext.toAST(imports: List<ImportDeclaration>): ClassASTNod
     val type = type().toAST()
 
     return ClassASTNode(type, access).apply {
+        annotationList()?.annotation()?.map { it.toAST(imports) }?.let { annotations ->
+            this.annotations.addAll(annotations)
+        }
+
         val (fields, methods) = classBody().toAST(imports)
 
         this.fields.addAll(fields)
