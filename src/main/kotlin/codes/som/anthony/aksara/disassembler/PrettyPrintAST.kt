@@ -77,14 +77,12 @@ fun writeAST(prog: AksaraASTProgram, output: Output) {
             output.write(" ")
             output.writeType(prog, methodNode.returnType)
 
-            if (methodNode.parameterTypes.isNotEmpty()) {
-                output.write("(")
-                for ((index, type) in methodNode.parameterTypes.withIndex()) {
-                    if (index != 0) output.write(", ")
-                    output.writeType(prog, type)
-                }
-                output.write(")")
+            output.write("(")
+            for ((index, type) in methodNode.parameterTypes.withIndex()) {
+                if (index != 0) output.write(", ")
+                output.writeType(prog, type)
             }
+            output.write(")")
 
             output.end()
 
