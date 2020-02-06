@@ -23,13 +23,13 @@ fun MethodDeclarationContext.toAST(imports: List<ImportDeclaration>): MethodASTN
             this.annotations.addAll(annotations)
         }
 
-        methodBody()?.toAST()?.let { (code, tryCatchBlocks) ->
+        methodBody()?.toAST(imports)?.let { (code, tryCatchBlocks) ->
             this.code = code
             this.tryCatchBlocks.addAll(tryCatchBlocks)
         }
     }
 }
 
-fun MethodBodyContext.toAST(): Pair<InsnList, List<TryCatchBlockNode>> {
-    TODO()
+fun MethodBodyContext.toAST(imports: List<ImportDeclaration>): Pair<InsnList, List<TryCatchBlockNode>> {
+    return instructions().toAST(imports)
 }

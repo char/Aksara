@@ -171,11 +171,6 @@ BooleanLiteral
     | 'false'
     ;
 
-Identifier
-    : (Letter | '_') (Letter | '_' | DecDigit | '/')*
-    | '`' ~('`')+ '`'
-    ;
-
 
 CharacterLiteral
     : SINGLE_QUOTE (.) SINGLE_QUOTE
@@ -207,165 +202,165 @@ fragment Letter
     | UNICODE_CLASS_NL
     ;
 
-NOP: 'nop' ;
-ACONST_NULL: 'aconst_null' ;
-ICONST_M1: 'iconst_m1' ;
-ICONST_0: 'iconst_0' ;
-ICONST_1: 'iconst_1' ;
-ICONST_2: 'iconst_2' ;
-ICONST_3: 'iconst_3' ;
-ICONST_4: 'iconst_4' ;
-ICONST_5: 'iconst_5' ;
-LCONST_0: 'lconst_0' ;
-LCONST_1: 'lconst_1' ;
-FCONST_0: 'fconst_0' ;
-FCONST_1: 'fconst_1' ;
-FCONST_2: 'fconst_2' ;
-DCONST_0: 'dconst_0' ;
-DCONST_1: 'dconst_1' ;
-BIPUSH: 'bipush' ;
-SIPUSH: 'sipush' ;
-LDC: 'ldc' ;
-LDC_W: 'ldc_w' ;
-LDC2_W: 'ldc2_w' ;
-ILOAD: 'iload' ;
-LLOAD: 'lload' ;
-FLOAD: 'fload' ;
-DLOAD: 'dload' ;
-ALOAD: 'aload' ;
-IALOAD: 'iaload' ;
-LALOAD: 'laload' ;
-FALOAD: 'faload' ;
-DALOAD: 'daload' ;
-AALOAD: 'aaload' ;
-BALOAD: 'baload' ;
-CALOAD: 'caload' ;
-SALOAD: 'saload' ;
-ISTORE: 'istore' ;
-LSTORE: 'lstore' ;
-FSTORE: 'fstore' ;
-DSTORE: 'dstore' ;
-ASTORE: 'astore' ;
-IASTORE: 'iastore' ;
-LASTORE: 'lastore' ;
-FASTORE: 'fastore' ;
-DASTORE: 'dastore' ;
-AASTORE: 'aastore' ;
-BASTORE: 'bastore' ;
-CASTORE: 'castore' ;
-SASTORE: 'sastore' ;
-POP: 'pop' ;
-POP2: 'pop2' ;
-DUP: 'dup' ;
-DUP_X1: 'dup_x1' ;
-DUP_X2: 'dup_x2' ;
-DUP2: 'dup2' ;
-DUP2_X1: 'dup2_x1' ;
-DUP2_X2: 'dup2_x2' ;
-SWAP: 'swap' ;
-IADD: 'iadd' ;
-LADD: 'ladd' ;
-FADD: 'fadd' ;
-DADD: 'dadd' ;
-ISUB: 'isub' ;
-LSUB: 'lsub' ;
-FSUB: 'fsub' ;
-DSUB: 'dsub' ;
-IMUL: 'imul' ;
-LMUL: 'lmul' ;
-FMUL: 'fmul' ;
-DMUL: 'dmul' ;
-IDIV: 'idiv' ;
-LDIV: 'ldiv' ;
-FDIV: 'fdiv' ;
-DDIV: 'ddiv' ;
-IREM: 'irem' ;
-LREM: 'lrem' ;
-FREM: 'frem' ;
-DREM: 'drem' ;
-INEG: 'ineg' ;
-LNEG: 'lneg' ;
-FNEG: 'fneg' ;
-DNEG: 'dneg' ;
-ISHL: 'ishl' ;
-LSHL: 'lshl' ;
-ISHR: 'ishr' ;
-LSHR: 'lshr' ;
-IUSHR: 'iushr' ;
-LUSHR: 'lushr' ;
-IAND: 'iand' ;
-LAND: 'land' ;
-IOR: 'ior' ;
-LOR: 'lor' ;
-IXOR: 'ixor' ;
-LXOR: 'lxor' ;
-IINC: 'iinc' ;
-I2L: 'i2l' ;
-I2F: 'i2f' ;
-I2D: 'i2d' ;
-L2I: 'l2i' ;
-L2F: 'l2f' ;
-L2D: 'l2d' ;
-F2I: 'f2i' ;
-F2L: 'f2l' ;
-F2D: 'f2d' ;
-D2I: 'd2i' ;
-D2L: 'd2l' ;
-D2F: 'd2f' ;
-I2B: 'i2b' ;
-I2C: 'i2c' ;
-I2S: 'i2s' ;
-LCMP: 'lcmp' ;
-FCMPL: 'fcmpl' ;
-FCMPG: 'fcmpg' ;
-DCMPL: 'dcmpl' ;
-DCMPG: 'dcmpg' ;
-IFEQ: 'ifeq' ;
-IFNE: 'ifne' ;
-IFLT: 'iflt' ;
-IFGE: 'ifge' ;
-IFGT: 'ifgt' ;
-IFLE: 'ifle' ;
-IF_ICMPEQ: 'if_icmpeq' ;
-IF_ICMPNE: 'if_icmpne' ;
-IF_ICMPLT: 'if_icmplt' ;
-IF_ICMPGE: 'if_icmpge' ;
-IF_ICMPGT: 'if_icmpgt' ;
-IF_ICMPLE: 'if_icmple' ;
-IF_ACMPEQ: 'if_acmpeq' ;
-IF_ACMPNE: 'if_acmpne' ;
-GOTO: 'goto' ;
-JSR: 'jsr' ;
-RET: 'ret' ;
-TABLESWITCH: 'tableswitch' ;
-LOOKUPSWITCH: 'lookupswitch' ;
-IRETURN: 'ireturn' ;
-LRETURN: 'lreturn' ;
-FRETURN: 'freturn' ;
-DRETURN: 'dreturn' ;
-ARETURN: 'areturn' ;
-RETURN: 'return' ;
-GETSTATIC: 'getstatic' ;
-PUTSTATIC: 'putstatic' ;
-GETFIELD: 'getfield' ;
-PUTFIELD: 'putfield' ;
-INVOKEVIRTUAL: 'invokevirtual' ;
-INVOKESPECIAL: 'invokespecial' ;
-INVOKESTATIC: 'invokestatic' ;
-INVOKEINTERFACE: 'invokeinterface' ;
-INVOKEDYNAMIC: 'invokedynamic' ;
-NEW: 'new' ;
-NEWARRAY: 'newarray' ;
-ANEWARRAY: 'anewarray' ;
-ARRAYLENGTH: 'arraylength' ;
-ATHROW: 'athrow' ;
-CHECKCAST: 'checkcast' ;
-INSTANCEOF: 'instanceof' ;
-MONITORENTER: 'monitorenter' ;
-MONITOREXIT: 'monitorexit' ;
-MULTIANEWARRAY: 'multianewarray' ;
-IFNULL: 'ifnull' ;
-IFNONNULL: 'ifnonnull' ;
+fragment NOP: 'nop' ;
+fragment ACONST_NULL: 'aconst_null' ;
+fragment ICONST_M1: 'iconst_m1' ;
+fragment ICONST_0: 'iconst_0' ;
+fragment ICONST_1: 'iconst_1' ;
+fragment ICONST_2: 'iconst_2' ;
+fragment ICONST_3: 'iconst_3' ;
+fragment ICONST_4: 'iconst_4' ;
+fragment ICONST_5: 'iconst_5' ;
+fragment LCONST_0: 'lconst_0' ;
+fragment LCONST_1: 'lconst_1' ;
+fragment FCONST_0: 'fconst_0' ;
+fragment FCONST_1: 'fconst_1' ;
+fragment FCONST_2: 'fconst_2' ;
+fragment DCONST_0: 'dconst_0' ;
+fragment DCONST_1: 'dconst_1' ;
+fragment BIPUSH: 'bipush' ;
+fragment SIPUSH: 'sipush' ;
+fragment LDC: 'ldc' ;
+fragment LDC_W: 'ldc_w' ;
+fragment LDC2_W: 'ldc2_w' ;
+fragment ILOAD: 'iload' ;
+fragment LLOAD: 'lload' ;
+fragment FLOAD: 'fload' ;
+fragment DLOAD: 'dload' ;
+fragment ALOAD: 'aload' ;
+fragment IALOAD: 'iaload' ;
+fragment LALOAD: 'laload' ;
+fragment FALOAD: 'faload' ;
+fragment DALOAD: 'daload' ;
+fragment AALOAD: 'aaload' ;
+fragment BALOAD: 'baload' ;
+fragment CALOAD: 'caload' ;
+fragment SALOAD: 'saload' ;
+fragment ISTORE: 'istore' ;
+fragment LSTORE: 'lstore' ;
+fragment FSTORE: 'fstore' ;
+fragment DSTORE: 'dstore' ;
+fragment ASTORE: 'astore' ;
+fragment IASTORE: 'iastore' ;
+fragment LASTORE: 'lastore' ;
+fragment FASTORE: 'fastore' ;
+fragment DASTORE: 'dastore' ;
+fragment AASTORE: 'aastore' ;
+fragment BASTORE: 'bastore' ;
+fragment CASTORE: 'castore' ;
+fragment SASTORE: 'sastore' ;
+fragment POP: 'pop' ;
+fragment POP2: 'pop2' ;
+fragment DUP: 'dup' ;
+fragment DUP_X1: 'dup_x1' ;
+fragment DUP_X2: 'dup_x2' ;
+fragment DUP2: 'dup2' ;
+fragment DUP2_X1: 'dup2_x1' ;
+fragment DUP2_X2: 'dup2_x2' ;
+fragment SWAP: 'swap' ;
+fragment IADD: 'iadd' ;
+fragment LADD: 'ladd' ;
+fragment FADD: 'fadd' ;
+fragment DADD: 'dadd' ;
+fragment ISUB: 'isub' ;
+fragment LSUB: 'lsub' ;
+fragment FSUB: 'fsub' ;
+fragment DSUB: 'dsub' ;
+fragment IMUL: 'imul' ;
+fragment LMUL: 'lmul' ;
+fragment FMUL: 'fmul' ;
+fragment DMUL: 'dmul' ;
+fragment IDIV: 'idiv' ;
+fragment LDIV: 'ldiv' ;
+fragment FDIV: 'fdiv' ;
+fragment DDIV: 'ddiv' ;
+fragment IREM: 'irem' ;
+fragment LREM: 'lrem' ;
+fragment FREM: 'frem' ;
+fragment DREM: 'drem' ;
+fragment INEG: 'ineg' ;
+fragment LNEG: 'lneg' ;
+fragment FNEG: 'fneg' ;
+fragment DNEG: 'dneg' ;
+fragment ISHL: 'ishl' ;
+fragment LSHL: 'lshl' ;
+fragment ISHR: 'ishr' ;
+fragment LSHR: 'lshr' ;
+fragment IUSHR: 'iushr' ;
+fragment LUSHR: 'lushr' ;
+fragment IAND: 'iand' ;
+fragment LAND: 'land' ;
+fragment IOR: 'ior' ;
+fragment LOR: 'lor' ;
+fragment IXOR: 'ixor' ;
+fragment LXOR: 'lxor' ;
+fragment IINC: 'iinc' ;
+fragment I2L: 'i2l' ;
+fragment I2F: 'i2f' ;
+fragment I2D: 'i2d' ;
+fragment L2I: 'l2i' ;
+fragment L2F: 'l2f' ;
+fragment L2D: 'l2d' ;
+fragment F2I: 'f2i' ;
+fragment F2L: 'f2l' ;
+fragment F2D: 'f2d' ;
+fragment D2I: 'd2i' ;
+fragment D2L: 'd2l' ;
+fragment D2F: 'd2f' ;
+fragment I2B: 'i2b' ;
+fragment I2C: 'i2c' ;
+fragment I2S: 'i2s' ;
+fragment LCMP: 'lcmp' ;
+fragment FCMPL: 'fcmpl' ;
+fragment FCMPG: 'fcmpg' ;
+fragment DCMPL: 'dcmpl' ;
+fragment DCMPG: 'dcmpg' ;
+fragment IFEQ: 'ifeq' ;
+fragment IFNE: 'ifne' ;
+fragment IFLT: 'iflt' ;
+fragment IFGE: 'ifge' ;
+fragment IFGT: 'ifgt' ;
+fragment IFLE: 'ifle' ;
+fragment IF_ICMPEQ: 'if_icmpeq' ;
+fragment IF_ICMPNE: 'if_icmpne' ;
+fragment IF_ICMPLT: 'if_icmplt' ;
+fragment IF_ICMPGE: 'if_icmpge' ;
+fragment IF_ICMPGT: 'if_icmpgt' ;
+fragment IF_ICMPLE: 'if_icmple' ;
+fragment IF_ACMPEQ: 'if_acmpeq' ;
+fragment IF_ACMPNE: 'if_acmpne' ;
+fragment GOTO: 'goto' ;
+fragment JSR: 'jsr' ;
+fragment RET: 'ret' ;
+fragment TABLESWITCH: 'tableswitch' ;
+fragment LOOKUPSWITCH: 'lookupswitch' ;
+fragment IRETURN: 'ireturn' ;
+fragment LRETURN: 'lreturn' ;
+fragment FRETURN: 'freturn' ;
+fragment DRETURN: 'dreturn' ;
+fragment ARETURN: 'areturn' ;
+fragment RETURN: 'return' ;
+fragment GETSTATIC: 'getstatic' ;
+fragment PUTSTATIC: 'putstatic' ;
+fragment GETFIELD: 'getfield' ;
+fragment PUTFIELD: 'putfield' ;
+fragment INVOKEVIRTUAL: 'invokevirtual' ;
+fragment INVOKESPECIAL: 'invokespecial' ;
+fragment INVOKESTATIC: 'invokestatic' ;
+fragment INVOKEINTERFACE: 'invokeinterface' ;
+fragment INVOKEDYNAMIC: 'invokedynamic' ;
+fragment NEW: 'new' ;
+fragment NEWARRAY: 'newarray' ;
+fragment ANEWARRAY: 'anewarray' ;
+fragment ARRAYLENGTH: 'arraylength' ;
+fragment ATHROW: 'athrow' ;
+fragment CHECKCAST: 'checkcast' ;
+fragment INSTANCEOF: 'instanceof' ;
+fragment MONITORENTER: 'monitorenter' ;
+fragment MONITOREXIT: 'monitorexit' ;
+fragment MULTIANEWARRAY: 'multianewarray' ;
+fragment IFNULL: 'ifnull' ;
+fragment IFNONNULL: 'ifnonnull' ;
 
 fragment ConstantInstruction
     : ACONST_NULL
@@ -510,6 +505,30 @@ ImmediateIntPushInstruction
     | SIPUSH
     ;
 
+FieldAccessInstruction
+    : GETSTATIC
+    | PUTSTATIC
+    | GETFIELD
+    | PUTFIELD
+    ;
+
+MethodInvocationInstruction
+    : INVOKESTATIC
+    | INVOKESPECIAL
+    | INVOKEVIRTUAL
+    | INVOKEINTERFACE
+    ;
+
+LoadConstantInstruction
+    : LDC
+    | LDC2_W
+    | LDC_W
+    ;
+
+Identifier
+    : (Letter | '_') (Letter | '_' | DecDigit | '/')*
+    | '`' ~('`')+ '`'
+    ;
 
 mode Inside ;
 

@@ -32,6 +32,8 @@ fun assembleAST(prog: AksaraASTProgram): List<ClassNode> {
 
     for (progClass in prog.classes) {
         val node = ClassNode()
+        node.version = 52
+        node.superName = "java/lang/Object"
 
         node.access = progClass.access
         node.name = progClass.type.internalName

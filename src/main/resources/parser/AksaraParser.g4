@@ -34,15 +34,22 @@ methodSignature
     ;
 
 methodDeclaration
-    : (annotationList NL+)? modifierList identifier methodSignature (NL* LCURL NL* methodBody NL* RCURL)?
-    ;
-
-instruction
-    : SimpleInstruction
-    | (ImmediateIntPushInstruction intLiteral)
+    : (annotationList NL+)? modifierList identifier methodSignature methodBody?
     ;
 
 methodBody
+    : NL* LCURL NL* instructions? NL* RCURL
+    ;
+
+instruction
+    : (SimpleInstruction)
+    | (ImmediateIntPushInstruction intLiteral)
+    | (FieldAccessInstruction type identifier type)
+    | (MethodInvocationInstruction type identifier methodSignature)
+    | (LoadConstantInstruction literal)
+    ;
+
+instructions
     : instruction (semi instruction)*
     ;
 

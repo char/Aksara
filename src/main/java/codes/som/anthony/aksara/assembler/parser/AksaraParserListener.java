@@ -108,6 +108,16 @@ public interface AksaraParserListener extends ParseTreeListener {
 	 */
 	void exitMethodDeclaration(AksaraParser.MethodDeclarationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AksaraParser#methodBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodBody(AksaraParser.MethodBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AksaraParser#methodBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodBody(AksaraParser.MethodBodyContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AksaraParser#instruction}.
 	 * @param ctx the parse tree
 	 */
@@ -118,15 +128,15 @@ public interface AksaraParserListener extends ParseTreeListener {
 	 */
 	void exitInstruction(AksaraParser.InstructionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AksaraParser#methodBody}.
+	 * Enter a parse tree produced by {@link AksaraParser#instructions}.
 	 * @param ctx the parse tree
 	 */
-	void enterMethodBody(AksaraParser.MethodBodyContext ctx);
+	void enterInstructions(AksaraParser.InstructionsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AksaraParser#methodBody}.
+	 * Exit a parse tree produced by {@link AksaraParser#instructions}.
 	 * @param ctx the parse tree
 	 */
-	void exitMethodBody(AksaraParser.MethodBodyContext ctx);
+	void exitInstructions(AksaraParser.InstructionsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AksaraParser#classBody}.
 	 * @param ctx the parse tree

@@ -136,6 +136,18 @@ public class AksaraParserBaseListener implements AksaraParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMethodBody(AksaraParser.MethodBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethodBody(AksaraParser.MethodBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterInstruction(AksaraParser.InstructionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -148,13 +160,13 @@ public class AksaraParserBaseListener implements AksaraParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMethodBody(AksaraParser.MethodBodyContext ctx) { }
+	@Override public void enterInstructions(AksaraParser.InstructionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMethodBody(AksaraParser.MethodBodyContext ctx) { }
+	@Override public void exitInstructions(AksaraParser.InstructionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
