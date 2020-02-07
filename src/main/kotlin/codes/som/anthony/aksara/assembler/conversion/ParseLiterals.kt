@@ -40,10 +40,30 @@ fun LongLiteralContext.toAST(): Long =
         BinLiteral().text.drop("0b".length).toLong(2)
 
 fun FloatLiteralContext.toAST() =
+        Identifier()?.let { identifier ->
+            when (identifier.text.toLowerCase()) {
+                "inf" -> Float.POSITIVE_INFINITY
+                "neginf" -> Float.NEGATIVE_INFINITY
+                "nan" -> Float.NaN
+                "max" -> Float.MAX_VALUE
+                "min" -> Float.MIN_VALUE
+                else -> error("Unknown special float literal value '${identifier.text}'")
+            }
+        } ?:
         RealLiteral()?.text?.toFloat() ?:
         IntegerLiteral().text.toFloat()
 
 fun DoubleLiteralContext.toAST() =
+        Identifier()?.let { identifier ->
+            when (identifier.text.toLowerCase()) {
+                "inf" -> Double.POSITIVE_INFINITY
+                "neginf" -> Double.NEGATIVE_INFINITY
+                "nan" -> Double.NaN
+                "max" -> Double.MAX_VALUE
+                "min" -> Double.MIN_VALUE
+                else -> error("Unknown special double literal value '${identifier.text}'")
+            }
+        } ?:
         RealLiteral()?.text?.toDouble() ?:
         IntegerLiteral().text.toDouble()
 

@@ -138,12 +138,14 @@ longLiteral
     ;
 
 floatLiteral
-    : (RealLiteral | IntegerLiteral) FLOAT_TRAILER
+    : ((RealLiteral | IntegerLiteral) FLOAT_TRAILER)
+    | (FLOAT_TRAILER DOT Identifier)
     ;
 
 doubleLiteral
     : RealLiteral
     | (IntegerLiteral DOUBLE_TRAILER)
+    | (DOUBLE_TRAILER DOT Identifier)
     ;
 
 characterLiteral
