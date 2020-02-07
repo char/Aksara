@@ -131,8 +131,6 @@ fun disassembleCode(prog: AksaraASTProgram, method: MethodASTNode, output: Inden
         addLabel(tcb.handler.label)
     }
 
-    // TODO: Populate labels
-
     for (insn in code) {
         disassembleInstruction(prog, labels, insn, output)
     }
