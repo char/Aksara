@@ -1,12 +1,18 @@
 package codes.som.anthony.aksara.assembler.conversion
 
+import codes.som.anthony.aksara.assembler.AssemblyContext
 import codes.som.anthony.aksara.assembler.parser.AksaraParser.TypeContext
 import codes.som.anthony.aksara.ast.ImportDeclaration
 import codes.som.anthony.aksara.ast.resolve
 import org.objectweb.asm.Type
 
-fun TypeContext.toAST(imports: List<ImportDeclaration> = emptyList()): Type {
+fun TypeContext.toAST(ctx: AssemblyContext): Type {
+    val (imports, selfType) = ctx
+
     fun resolveIdentifier(identifier: String): Type {
+        if (selfType != null && identifier == "self")
+            return selfType
+
         return when (identifier) {
             "void" -> Type.VOID_TYPE
             "char" -> Type.CHAR_TYPE

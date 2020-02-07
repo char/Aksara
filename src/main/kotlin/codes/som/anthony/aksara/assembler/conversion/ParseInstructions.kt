@@ -1,5 +1,6 @@
 package codes.som.anthony.aksara.assembler.conversion
 
+import codes.som.anthony.aksara.assembler.AssemblyContext
 import codes.som.anthony.aksara.assembler.conversion.data.opcodeNameToValue
 import codes.som.anthony.aksara.assembler.parser.AksaraParser
 import codes.som.anthony.aksara.ast.ImportDeclaration
@@ -7,7 +8,7 @@ import org.objectweb.asm.Opcodes.*
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.*
 
-fun AksaraParser.InstructionsContext.toAST(imports: List<ImportDeclaration>): Pair<InsnList, List<TryCatchBlockNode>> {
+fun AksaraParser.InstructionsContext.toAST(ctx: AssemblyContext): Pair<InsnList, List<TryCatchBlockNode>> {
     val instructions = InsnList()
     val tryCatchBlocks = mutableListOf<TryCatchBlockNode>()
 
@@ -25,24 +26,24 @@ fun AksaraParser.InstructionsContext.toAST(imports: List<ImportDeclaration>): Pa
 
         if (insn.FieldAccessInstruction() != null) {
             val mnemonic = insn.FieldAccessInstruction().text
-            val owner = insn.type(0).toAST(imports)
+            val owner = insn.type(0).toAST(ctx)
             val name = insn.identifier().toAST()
-            val returnType = insn.type(1).toAST(imports)
+            val returnType = insn.type(1).toAST(ctx)
 
             instructions.add(convertFieldAccessInstruction(mnemonic, owner, name, returnType))
         }
 
         if (insn.MethodInvocationInstruction() != null) {
             val mnemonic = insn.MethodInvocationInstruction().text
-            val owner = insn.type(0).toAST(imports)
+            val owner = insn.type(0).toAST(ctx)
             val name = insn.identifier().toAST()
-            val (returnType, parameterTypes) = insn.methodSignature().toAST(imports)
+            val (returnType, parameterTypes) = insn.methodSignature().toAST(ctx)
 
             instructions.add(convertMethodInvocationInstruction(mnemonic, owner, name, returnType, parameterTypes))
         }
 
         if (insn.LoadConstantInstruction() != null) {
-            val literal = insn.literal().toAST(imports).to()
+            val literal = insn.literal().toAST(ctx).to()
             instructions.add(convertLoadConstantInstruction(literal))
         }
     }

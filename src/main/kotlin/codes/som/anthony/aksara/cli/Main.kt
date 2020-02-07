@@ -48,6 +48,7 @@ fun main(args: Array<String>) {
             val classPath = Paths.get("classes/${node.name}.class")
             Files.createDirectories(classPath.parent)
             Files.write(classPath, classBuffer)
+            println("${Colours.GREEN}[+]${Colours.RESET} $classPath")
         }
     } else if (path.toString().toLowerCase().endsWith(".class")) {
         val node = ClassNode()
@@ -57,12 +58,15 @@ fun main(args: Array<String>) {
 
         val prog = disassembleClassNode(node)
 
-        writeAST(prog, ColouredOutput(object : Output {
+        val stdOut = object : Output {
             override fun write(content: String) {
                 print(content)
             }
 
             override fun close() {}
-        }))
+        }
+        val output = if (System.console() != null) ColouredOutput(stdOut) else stdOut
+
+        writeAST(prog, output)
     } else error("Unsupported file type.")
 }

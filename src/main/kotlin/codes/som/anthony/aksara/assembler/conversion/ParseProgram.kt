@@ -1,5 +1,6 @@
 package codes.som.anthony.aksara.assembler.conversion
 
+import codes.som.anthony.aksara.assembler.AssemblyContext
 import codes.som.anthony.aksara.assembler.parser.AksaraParser.*
 import codes.som.anthony.aksara.ast.*
 import org.objectweb.asm.Type
@@ -38,29 +39,31 @@ fun ClassDeclarationsContext.toAST(imports: List<ImportDeclaration>): List<Class
 
 fun ClassDeclarationContext.toAST(imports: List<ImportDeclaration>): ClassASTNode {
     val access = modifierList().toAST()
-    val type = type().toAST()
+    val type = type().toAST(AssemblyContext(emptyList(), null))
+
+    val ctx = AssemblyContext(imports, type)
 
     return ClassASTNode(type, access).apply {
-        annotationList()?.annotation()?.map { it.toAST(imports) }?.let { annotations ->
+        annotationList()?.annotation()?.map { it.toAST(ctx) }?.let { annotations ->
             this.annotations.addAll(annotations)
         }
 
-        val (fields, methods) = classBody().toAST(imports)
+        val (fields, methods) = classBody().toAST(ctx)
 
         this.fields.addAll(fields)
         this.methods.addAll(methods)
     }
 }
 
-fun ClassBodyContext.toAST(imports: List<ImportDeclaration>): Pair<List<FieldASTNode>, List<MethodASTNode>> {
+fun ClassBodyContext.toAST(ctx: AssemblyContext): Pair<List<FieldASTNode>, List<MethodASTNode>> {
     val fields = mutableListOf<FieldASTNode>()
     val methods = mutableListOf<MethodASTNode>()
 
     for (field in fieldDeclaration())
-        fields.add(field.toAST(imports))
+        fields.add(field.toAST(ctx))
 
     for (method in methodDeclaration())
-        methods.add(method.toAST(imports))
+        methods.add(method.toAST(ctx))
 
     return Pair(fields, methods)
 }

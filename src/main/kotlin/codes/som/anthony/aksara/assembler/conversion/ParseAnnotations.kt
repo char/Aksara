@@ -1,5 +1,6 @@
 package codes.som.anthony.aksara.assembler.conversion
 
+import codes.som.anthony.aksara.assembler.AssemblyContext
 import codes.som.anthony.aksara.assembler.parser.AksaraParser.*
 import codes.som.anthony.aksara.ast.AnnotationASTNode
 import codes.som.anthony.aksara.ast.AnnotationType
@@ -11,17 +12,17 @@ fun AnnotationTypeContext.toAST(): AnnotationType {
             ?: RUNTIME().let { AnnotationType.RUNTIME }
 }
 
-fun AnnotationContext.toAST(imports: List<ImportDeclaration>): AnnotationASTNode {
-    val type = type().toAST(imports)
+fun AnnotationContext.toAST(ctx: AssemblyContext): AnnotationASTNode {
+    val type = type().toAST(ctx)
     val annotationType = annotationType().toAST()
-    val args = annotationArgument().map { it.toAST(imports) }
+    val args = annotationArgument().map { it.toAST(ctx) }
 
     return AnnotationASTNode(type, annotationType, args)
 }
 
-fun AnnotationArgumentContext.toAST(imports: List<ImportDeclaration>): Pair<String, ConstantASTNode> {
+fun AnnotationArgumentContext.toAST(ctx: AssemblyContext): Pair<String, ConstantASTNode> {
     val name = identifier().toAST()
-    val argument = literal().toAST(imports)
+    val argument = literal().toAST(ctx)
 
     return Pair(name, argument)
 }

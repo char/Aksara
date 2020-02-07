@@ -1,5 +1,6 @@
 package codes.som.anthony.aksara.assembler.conversion
 
+import codes.som.anthony.aksara.assembler.AssemblyContext
 import codes.som.anthony.aksara.assembler.parser.AksaraParser.*
 import codes.som.anthony.aksara.ast.ConstantASTNode
 import codes.som.anthony.aksara.ast.ImportDeclaration
@@ -72,7 +73,7 @@ fun CharacterLiteralContext.toAST() =
         EscapedCharacterLiteral().text.let { it.substring(1, it.length - 1) }
             .let { unescape(it).first() }
 
-fun LiteralContext.toAST(imports: List<ImportDeclaration>): ConstantASTNode {
+fun LiteralContext.toAST(ctx: AssemblyContext): ConstantASTNode {
     return ConstantASTNode.from(
             stringLiteral()?.toAST() ?:
             intLiteral()?.toAST() ?:
@@ -80,6 +81,6 @@ fun LiteralContext.toAST(imports: List<ImportDeclaration>): ConstantASTNode {
             floatLiteral()?.toAST() ?:
             doubleLiteral()?.toAST() ?:
             characterLiteral()?.toAST() ?:
-            type().toAST(imports)
+            type().toAST(ctx)
     )
 }

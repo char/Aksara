@@ -26,7 +26,7 @@ classDeclaration
     ;
 
 fieldDeclaration
-    : (annotationList NL+)? modifierList identifier COLON type
+    : (annotationList NL+)? modifierList identifier type
     ;
 
 methodSignature
@@ -100,7 +100,7 @@ multiLineStringContent
     ;
 
 modifierList
-    : modifier+
+    : modifier*
     ;
 
 modifier
