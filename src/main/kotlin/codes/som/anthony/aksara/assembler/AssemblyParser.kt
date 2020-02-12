@@ -12,19 +12,13 @@ import java.nio.file.Paths
 fun main() {
     val lexer = AksaraLexer(CharStreams.fromString("""
         import java.lang.System
-        import java.lang.String
         import java.io.PrintStream
         
         public com/example/HelloWorld {
-            private static message String
-        
             public static main void(String[]) {
-                ldc "Hello, world!"
-                putstatic self message String
-            
-                getstatic System out PrintStream
-                getstatic self message String
-                invokevirtual PrintStream println void(String)
+                getstatic java/lang/System out java/lang/PrintStream
+                ldc "Hello world!"
+                invokevirtual java/lang/PrintStream println void(java/lang/String)
                 return
             }
         }

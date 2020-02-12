@@ -26,7 +26,7 @@ classDeclaration
     ;
 
 fieldDeclaration
-    : (annotationList NL+)? modifierList identifier type
+    : (annotationList NL+)? modifierList identifier COLON type
     ;
 
 methodSignature
@@ -47,6 +47,9 @@ instruction
     | (FieldAccessInstruction type identifier type)
     | (MethodInvocationInstruction type identifier methodSignature)
     | (LoadConstantInstruction literal)
+    | (LocalVariableAccessInstruction intLiteral)
+    | (IincInstruction intLiteral intLiteral?)
+    | (TypeReceivingInstruction type)
     ;
 
 instructions
@@ -100,7 +103,7 @@ multiLineStringContent
     ;
 
 modifierList
-    : modifier*
+    : modifier+
     ;
 
 modifier
@@ -138,14 +141,12 @@ longLiteral
     ;
 
 floatLiteral
-    : ((RealLiteral | IntegerLiteral) FLOAT_TRAILER)
-    | (FLOAT_TRAILER DOT Identifier)
+    : (RealLiteral | IntegerLiteral) FLOAT_TRAILER
     ;
 
 doubleLiteral
     : RealLiteral
     | (IntegerLiteral DOUBLE_TRAILER)
-    | (DOUBLE_TRAILER DOT Identifier)
     ;
 
 characterLiteral

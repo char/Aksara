@@ -65,9 +65,11 @@ fun formatAccess(access: Int, accessContext: AccessContext): String {
         )
     }
 
-    return accessFlags.mapNotNull { (value, name) ->
-        if ((access and value) != 0) name else null
-    }.joinToString(" ")
+    return accessFlags
+            .mapNotNull { (value, name) ->
+                if ((access and value) != 0) name else null
+            }
+            .joinToString(" ")
 }
 
 fun formatType(prog: AksaraASTProgram, type: Type, useImports: Boolean = true): String {

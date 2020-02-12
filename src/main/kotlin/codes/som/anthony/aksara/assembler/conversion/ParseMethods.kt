@@ -1,6 +1,5 @@
 package codes.som.anthony.aksara.assembler.conversion
 
-import codes.som.anthony.aksara.assembler.AssemblyContext
 import codes.som.anthony.aksara.assembler.parser.AksaraParser.*
 import codes.som.anthony.aksara.ast.ImportDeclaration
 import codes.som.anthony.aksara.ast.MethodASTNode
@@ -8,29 +7,29 @@ import org.objectweb.asm.Type
 import org.objectweb.asm.tree.InsnList
 import org.objectweb.asm.tree.TryCatchBlockNode
 
-fun MethodSignatureContext.toAST(ctx: AssemblyContext): Pair<Type, Array<Type>> {
-    val returnType = type(0).toAST(ctx)
-    val parameterTypes = type().drop(1).map { it.toAST(ctx) }.toTypedArray()
+fun MethodSignatureContext.toAST(imports: List<ImportDeclaration>): Pair<Type, Array<Type>> {
+    val returnType = type(0).toAST(imports)
+    val parameterTypes = type().drop(1).map { it.toAST(imports) }.toTypedArray()
     return Pair(returnType, parameterTypes)
 }
 
-fun MethodDeclarationContext.toAST(ctx: AssemblyContext): MethodASTNode {
+fun MethodDeclarationContext.toAST(imports: List<ImportDeclaration>): MethodASTNode {
     val access = modifierList().toAST()
     val name = identifier().toAST()
-    val (returnType, parameterTypes) = methodSignature().toAST(ctx)
+    val (returnType, parameterTypes) = methodSignature().toAST(imports)
 
     return MethodASTNode(access, name, returnType, parameterTypes).apply {
-        annotationList()?.annotation()?.map { it.toAST(ctx) }?.let { annotations ->
+        annotationList()?.annotation()?.map { it.toAST(imports) }?.let { annotations ->
             this.annotations.addAll(annotations)
         }
 
-        methodBody()?.toAST(ctx)?.let { (code, tryCatchBlocks) ->
+        methodBody()?.toAST(imports)?.let { (code, tryCatchBlocks) ->
             this.code = code
             this.tryCatchBlocks.addAll(tryCatchBlocks)
         }
     }
 }
 
-fun MethodBodyContext.toAST(ctx: AssemblyContext): Pair<InsnList, List<TryCatchBlockNode>> {
-    return instructions().toAST(ctx)
+fun MethodBodyContext.toAST(imports: List<ImportDeclaration>): Pair<InsnList, List<TryCatchBlockNode>> {
+    return instructions().toAST(imports)
 }

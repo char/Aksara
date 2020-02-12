@@ -32,6 +32,7 @@ class SlotElement(val slot: Int) : OutputElement()
 object IdentifierElement : OutputElement()
 
 sealed class ConstantElement : OutputElement() {
+    // TODO: We should probably pass values
     object IntConstantElement : ConstantElement()
     object FloatConstantElement : ConstantElement()
     object LongConstantElement : ConstantElement()
