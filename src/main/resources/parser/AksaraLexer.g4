@@ -525,31 +525,6 @@ LoadConstantInstruction
     | LDC_W
     ;
 
-LocalVariableAccessInstruction
-    : ISTORE
-    | LSTORE
-    | FSTORE
-    | DSTORE
-    | ASTORE
-    | ILOAD
-    | LLOAD
-    | FLOAD
-    | DLOAD
-    | ALOAD
-    ;
-
-IincInstruction
-    : IINC
-    ;
-
-TypeReceivingInstruction
-    : NEW
-    | CHECKCAST
-    | INSTANCEOF
-    | ANEWARRAY
-    | MULTIANEWARRAY
-    ;
-
 Identifier
     : (Letter | '_') (Letter | '_' | DecDigit | '/')*
     | '`' ~('`')+ '`'
