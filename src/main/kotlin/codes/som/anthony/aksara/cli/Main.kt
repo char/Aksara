@@ -57,16 +57,8 @@ fun main(args: Array<String>) {
         }
 
         val prog = disassembleClassNode(node)
-
-        val stdOut = object : Output {
-            override fun write(content: String) {
-                print(content)
-            }
-
-            override fun close() {}
-        }
-        val output = if (System.console() != null) ColouredOutput(stdOut) else stdOut
-
-        writeAST(prog, output)
+        val output = BasicOutput()
+        writeAST(prog, output.let { if (System.console() != null) ColouredOutput(it) else it })
+        println(output.contents)
     } else error("Unsupported file type.")
 }
