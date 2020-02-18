@@ -3,8 +3,6 @@ package codes.som.anthony.aksara.assembler.conversion
 import codes.som.anthony.aksara.assembler.AssemblyContext
 import codes.som.anthony.aksara.assembler.conversion.data.opcodeNameToValue
 import codes.som.anthony.aksara.assembler.parser.AksaraParser
-import codes.som.anthony.aksara.ast.ImportDeclaration
-import org.objectweb.asm.Opcodes.*
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.*
 

@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.3.61"
+    antlr
 }
 
 group = "codes.som.anthony"
@@ -17,6 +18,7 @@ dependencies {
     implementation("org.ow2.asm:asm-tree:7.2")
 
     implementation("org.antlr:antlr4-runtime:4.7.2")
+    antlr("org.antlr:antlr4:4.7.2")
 }
 
 tasks {
@@ -28,6 +30,10 @@ tasks {
     }
 }
 
+tasks.generateGrammarSource {
+    outputDirectory = File(outputDirectory, "codes/som/anthony/aksara/assembler/parser")
+    arguments.addAll(listOf("-package", "codes.som.anthony.aksara.assembler.parser"))
+}
 
 tasks.withType<Jar> {
     manifest {
