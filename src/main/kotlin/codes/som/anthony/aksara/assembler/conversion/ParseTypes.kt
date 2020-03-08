@@ -15,6 +15,7 @@ fun TypeContext.toAST(ctx: AssemblyContext): Type {
 
         return when (identifier) {
             "void" -> Type.VOID_TYPE
+            "bool" -> Type.BOOLEAN_TYPE
             "char" -> Type.CHAR_TYPE
             "byte" -> Type.BYTE_TYPE
             "short" -> Type.SHORT_TYPE

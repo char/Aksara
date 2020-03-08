@@ -563,6 +563,13 @@ IntIncrementInstruction
     : IINC
     ;
 
+TypeInstruction
+    : NEW
+    | ANEWARRAY
+    | CHECKCAST
+    | INSTANCEOF
+    ;
+
 Identifier
     : (Letter | '_') (Letter | '_' | DecDigit | '/')*
     | '`' ~('`')+ '`'

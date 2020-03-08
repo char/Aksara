@@ -181,6 +181,13 @@ fun jumpInsns() = arrayOf(
     "ifnonnull" to IFNONNULL
 )
 
+fun typeInsns() = arrayOf(
+    "new" to NEW,
+    "anewarray" to ANEWARRAY,
+    "checkcast" to CHECKCAST,
+    "instanceof" to INSTANCEOF
+)
+
 val opcodeNameToValue = mutableMapOf(
     "nop" to NOP,
     *constantInsns(),
@@ -196,5 +203,6 @@ val opcodeNameToValue = mutableMapOf(
     *loadConstantInsns(),
     *localVariableAccessInsns(),
     *jumpInsns(),
-    "iinc" to IINC
+    "iinc" to IINC,
+    *typeInsns()
 )

@@ -19,13 +19,18 @@ fun main() {
             private static message String
         
             public static main void(String[]) {
+                new Random
+                dup
+                invokespecial Random <init> void()
+                invokevirtual Random nextBoolean bool()
+                ifeq L0
+                getstatic java.lang.System out PrintStream
+                ldc "You got lucky!"
+                invokevirtual PrintStream println void(String)
+
+              L0:
+                getstatic java.lang.System out PrintStream
                 ldc "Hello, world!"
-                putstatic self message String
-                
-                my_label:
-            
-                getstatic System out PrintStream
-                getstatic self message String
                 invokevirtual PrintStream println void(String)
                 return
             }

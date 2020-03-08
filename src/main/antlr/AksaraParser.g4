@@ -50,6 +50,7 @@ instruction
     | (LocalVariableAccessInstruction intLiteral)
     | (JumpInstruction identifier)
     | (IntIncrementInstruction intLiteral intLiteral?)
+    | (TypeInstruction type)
     ;
 
 label

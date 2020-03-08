@@ -81,6 +81,12 @@ fun AksaraParser.BlockContext.toAST(ctx: AssemblyContext): Pair<InsnList, List<T
                 val value = insn.intLiteral(1)?.toAST() ?: 1
                 instructions.add(IincInsnNode(slot, value))
             }
+
+            if (insn.TypeInstruction() != null) {
+                val mnemonic = insn.TypeInstruction().text
+                val type = insn.type(0).toAST(ctx)
+                instructions.add(convertTypeInstruction(mnemonic, type))
+            }
         }
     }
 
@@ -119,4 +125,9 @@ private fun convertLocalVariableAccessInstruction(mnemonic: String, slot: Int): 
 private fun convertJumpInstruction(mnemonic: String, label: LabelNode): AbstractInsnNode {
     val opcode = opcodeNameToValue[mnemonic] ?: error("Unknown opcode: $mnemonic")
     return JumpInsnNode(opcode, label)
+}
+
+private fun convertTypeInstruction(mnemonic: String, type: Type): AbstractInsnNode {
+    val opcode = opcodeNameToValue[mnemonic] ?: error("Unknown opcode: $mnemonic")
+    return TypeInsnNode(opcode, type.internalName)
 }
