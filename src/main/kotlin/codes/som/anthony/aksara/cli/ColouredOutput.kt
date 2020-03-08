@@ -23,7 +23,7 @@ class ColouredOutput(private val child: Output) : Output {
         val elem: OutputElement? = stack.peek()
         if (elem != null) {
             when (elem) {
-                is AccessElement -> child.write(Colours.GRAY)
+                is AccessElement -> child.write(Colours.CYAN)
                 is KeywordElement, is OpcodeElement -> child.write(Colours.YELLOW)
                 is StringConstantElement -> child.write(Colours.GREEN)
                 is ConstantElement, is SlotElement -> child.write(Colours.BRIGHT_BLUE)
