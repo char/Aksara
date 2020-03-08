@@ -525,6 +525,40 @@ LoadConstantInstruction
     | LDC_W
     ;
 
+LocalVariableAccessInstruction
+    : ALOAD
+    | ILOAD
+    | LLOAD
+    | FLOAD
+    | DLOAD
+    | ASTORE
+    | ISTORE
+    | LSTORE
+    | FSTORE
+    | DSTORE
+    ;
+
+JumpInstruction
+    : IFEQ
+    | IFNE
+    | IFLT
+    | IFGE
+    | IFGT
+    | IFLE
+    | IF_ICMPEQ
+    | IF_ICMPNE
+    | IF_ICMPLT
+    | IF_ICMPGE
+    | IF_ICMPGT
+    | IF_ICMPLE
+    | IF_ACMPEQ
+    | IF_ACMPNE
+    | GOTO
+    | JSR
+    | IFNULL
+    | IFNONNULL
+    ;
+
 Identifier
     : (Letter | '_') (Letter | '_' | DecDigit | '/')*
     | '`' ~('`')+ '`'

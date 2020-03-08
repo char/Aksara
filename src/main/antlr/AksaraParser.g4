@@ -38,7 +38,7 @@ methodDeclaration
     ;
 
 methodBody
-    : NL* LCURL NL* instructions? NL* RCURL
+    : NL* LCURL NL* block? NL* RCURL
     ;
 
 instruction
@@ -47,10 +47,21 @@ instruction
     | (FieldAccessInstruction type identifier type)
     | (MethodInvocationInstruction type identifier methodSignature)
     | (LoadConstantInstruction literal)
+    | (LocalVariableAccessInstruction intLiteral)
+    | (JumpInstruction identifier)
     ;
 
-instructions
-    : instruction (semi instruction)*
+label
+    : identifier COLON
+    ;
+
+statement
+    : instruction
+    | label
+    ;
+
+block
+    : statement (semi statement)*
     ;
 
 classBody

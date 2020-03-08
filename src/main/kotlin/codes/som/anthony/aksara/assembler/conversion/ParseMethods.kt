@@ -32,5 +32,5 @@ fun MethodDeclarationContext.toAST(ctx: AssemblyContext): MethodASTNode {
 }
 
 fun MethodBodyContext.toAST(ctx: AssemblyContext): Pair<InsnList, List<TryCatchBlockNode>> {
-    return instructions().toAST(ctx)
+    return block().toAST(ctx)
 }

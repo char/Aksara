@@ -147,6 +147,40 @@ fun loadConstantInsns() = arrayOf(
     "ldc2_w" to LDC
 )
 
+fun localVariableAccessInsns() = arrayOf(
+    "iload" to ILOAD,
+    "lload" to LLOAD,
+    "fload" to FLOAD,
+    "dload" to DLOAD,
+    "aload" to ALOAD,
+    "istore" to ISTORE,
+    "lstore" to LSTORE,
+    "fstore" to FSTORE,
+    "dstore" to DSTORE,
+    "astore" to ASTORE
+)
+
+fun jumpInsns() = arrayOf(
+    "ifeq" to IFEQ,
+    "ifne" to IFNE,
+    "iflt" to IFLT,
+    "ifge" to IFGE,
+    "ifgt" to IFGT,
+    "ifle" to IFLE,
+    "if_icmpeq" to IF_ICMPEQ,
+    "if_icmpne" to IF_ICMPNE,
+    "if_icmplt" to IF_ICMPLT,
+    "if_icmpge" to IF_ICMPGE,
+    "if_icmpgt" to IF_ICMPGT,
+    "if_icmple" to IF_ICMPLE,
+    "if_acmpeq" to IF_ACMPEQ,
+    "if_acmpne" to IF_ACMPNE,
+    "goto" to GOTO,
+    "jsr" to JSR,
+    "ifnull" to IFNULL,
+    "ifnonnull" to IFNONNULL
+)
+
 val opcodeNameToValue = mutableMapOf(
     "nop" to NOP,
     *constantInsns(),
@@ -159,5 +193,7 @@ val opcodeNameToValue = mutableMapOf(
     *comparisonInsns(),
     *fieldAccessInsns(),
     *methodInvocationInsns(),
-    *loadConstantInsns()
+    *loadConstantInsns(),
+    *localVariableAccessInsns(),
+    *jumpInsns()
 )

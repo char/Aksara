@@ -21,6 +21,8 @@ fun main() {
             public static main void(String[]) {
                 ldc "Hello, world!"
                 putstatic self message String
+                
+                my_label:
             
                 getstatic System out PrintStream
                 getstatic self message String
