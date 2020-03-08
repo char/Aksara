@@ -6,7 +6,7 @@ import codes.som.anthony.aksara.assembler.parser.AksaraParser
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.*
 
-// TODO: Type instructions, switch instructions, invokedynamic, CONSTANT_Dynamic
+// TODO: Switch instructions, invokedynamic, CONSTANT_Dynamic
 fun AksaraParser.BlockContext.toAST(ctx: AssemblyContext): Pair<InsnList, List<TryCatchBlockNode>> {
     val instructions = InsnList()
     val tryCatchBlocks = mutableListOf<TryCatchBlockNode>()
