@@ -559,6 +559,10 @@ JumpInstruction
     | IFNONNULL
     ;
 
+IntIncrementInstruction
+    : IINC
+    ;
+
 Identifier
     : (Letter | '_') (Letter | '_' | DecDigit | '/')*
     | '`' ~('`')+ '`'

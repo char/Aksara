@@ -49,6 +49,7 @@ instruction
     | (LoadConstantInstruction literal)
     | (LocalVariableAccessInstruction intLiteral)
     | (JumpInstruction identifier)
+    | (IntIncrementInstruction intLiteral intLiteral?)
     ;
 
 label

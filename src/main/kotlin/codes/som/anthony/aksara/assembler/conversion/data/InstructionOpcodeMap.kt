@@ -195,5 +195,6 @@ val opcodeNameToValue = mutableMapOf(
     *methodInvocationInsns(),
     *loadConstantInsns(),
     *localVariableAccessInsns(),
-    *jumpInsns()
+    *jumpInsns(),
+    "iinc" to IINC
 )

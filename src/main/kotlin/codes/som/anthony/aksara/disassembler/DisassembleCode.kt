@@ -95,9 +95,11 @@ private fun disassembleInstruction(prog: AksaraASTProgram, labels: List<Label>, 
             output.write(" ")
             val varCst = IntConstantASTNode(insn.`var`)
             output.write(ConstantElement.from(varCst), formatConstant(prog, varCst))
-            output.write(" ")
-            val incrCst = IntConstantASTNode(insn.incr)
-            output.write(ConstantElement.from(incrCst), formatConstant(prog, incrCst))
+            if (insn.incr != 1) {
+                output.write(" ")
+                val incrCst = IntConstantASTNode(insn.incr)
+                output.write(ConstantElement.from(incrCst), formatConstant(prog, incrCst))
+            }
         }
 
         // TODO: TableSwitch, LookupSwitch

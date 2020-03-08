@@ -6,6 +6,7 @@ import codes.som.anthony.aksara.assembler.parser.AksaraParser
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.*
 
+// TODO: Type instructions, switch instructions, invokedynamic, CONSTANT_Dynamic
 fun AksaraParser.BlockContext.toAST(ctx: AssemblyContext): Pair<InsnList, List<TryCatchBlockNode>> {
     val instructions = InsnList()
     val tryCatchBlocks = mutableListOf<TryCatchBlockNode>()
@@ -34,7 +35,7 @@ fun AksaraParser.BlockContext.toAST(ctx: AssemblyContext): Pair<InsnList, List<T
 
             if (insn.ImmediateIntPushInstruction() != null) {
                 val mnemonic = insn.ImmediateIntPushInstruction().text
-                val operand = insn.intLiteral().toAST()
+                val operand = insn.intLiteral(0).toAST()
 
                 instructions.add(convertImmediateIntPushInstruction(mnemonic, operand))
             }
@@ -64,7 +65,7 @@ fun AksaraParser.BlockContext.toAST(ctx: AssemblyContext): Pair<InsnList, List<T
 
             if (insn.LocalVariableAccessInstruction() != null) {
                 val mnemonic = insn.LocalVariableAccessInstruction().text
-                val slot = insn.intLiteral().toAST()
+                val slot = insn.intLiteral(0).toAST()
                 instructions.add(convertLocalVariableAccessInstruction(mnemonic, slot))
             }
 
@@ -73,6 +74,12 @@ fun AksaraParser.BlockContext.toAST(ctx: AssemblyContext): Pair<InsnList, List<T
                 val labelName = insn.identifier().toAST()
                 val label = labels[labelName] ?: error("The label '$labelName' is not defined in this block")
                 instructions.add(convertJumpInstruction(mnemonic, label))
+            }
+
+            if (insn.IntIncrementInstruction() != null) {
+                val slot = insn.intLiteral(0).toAST()
+                val value = insn.intLiteral(1)?.toAST() ?: 1
+                instructions.add(IincInsnNode(slot, value))
             }
         }
     }
