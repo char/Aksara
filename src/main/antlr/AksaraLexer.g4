@@ -70,6 +70,10 @@ ENUM: 'enum' ;
 MANDATED: 'mandated' ;
 MODULE: 'module' ;
 
+// SWITCH LABEL
+
+DEFAULT: 'default' ;
+
 // LITERALS
 
 QUOTE_OPEN: '"' -> pushMode(LineString) ;
@@ -568,6 +572,10 @@ TypeInstruction
     | ANEWARRAY
     | CHECKCAST
     | INSTANCEOF
+    ;
+
+TableSwitchInstruction
+    : TABLESWITCH
     ;
 
 Identifier

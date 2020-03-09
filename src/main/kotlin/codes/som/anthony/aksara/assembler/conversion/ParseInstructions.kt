@@ -72,7 +72,7 @@ fun AksaraParser.BlockContext.toAST(ctx: AssemblyContext): Pair<InsnList, List<T
             if (insn.JumpInstruction() != null) {
                 val mnemonic = insn.JumpInstruction().text
                 val labelName = insn.identifier().toAST()
-                val label = labels[labelName] ?: error("The label '$labelName' is not defined in this block")
+                val label = labels[labelName] ?: error("Label '$labelName' is not defined in this block")
                 instructions.add(convertJumpInstruction(mnemonic, label))
             }
 
@@ -86,6 +86,12 @@ fun AksaraParser.BlockContext.toAST(ctx: AssemblyContext): Pair<InsnList, List<T
                 val mnemonic = insn.TypeInstruction().text
                 val type = insn.type(0).toAST(ctx)
                 instructions.add(convertTypeInstruction(mnemonic, type))
+            }
+
+            if (insn.TableSwitchInstruction() != null) {
+                val (default, matchLabels) = insn.switchLabel().toAST(labels)
+
+                instructions.add(convertTableSwitchInstruction(default, matchLabels))
             }
         }
     }
@@ -130,4 +136,15 @@ private fun convertJumpInstruction(mnemonic: String, label: LabelNode): Abstract
 private fun convertTypeInstruction(mnemonic: String, type: Type): AbstractInsnNode {
     val opcode = opcodeNameToValue[mnemonic] ?: error("Unknown opcode: $mnemonic")
     return TypeInsnNode(opcode, type.internalName)
+}
+
+private fun convertTableSwitchInstruction(default: LabelNode, matches: Map<Int, LabelNode>): AbstractInsnNode {
+    val min = matches.keys.min() ?: error("Could not calculate minimum for tableswitch instruction")
+    val max = matches.keys.max() ?: error("Could not calculate maximum for tableswitch instruction")
+
+    val sequentialLabels = (min .. max).map {
+        matches[it] ?: default
+    }.toTypedArray()
+
+    return TableSwitchInsnNode(min, max, default, *sequentialLabels)
 }

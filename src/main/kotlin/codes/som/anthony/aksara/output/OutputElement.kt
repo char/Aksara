@@ -23,6 +23,7 @@ sealed class KeywordElement : OutputElement() {
     object Import : KeywordElement()
     object BinaryAnnotation : KeywordElement()
     object RuntimeAnnotation : KeywordElement()
+    object Default : KeywordElement()
 }
 
 object InstructionElement : OutputElement()
@@ -30,6 +31,7 @@ class OpcodeElement(val opcode: Int) : OutputElement()
 class SlotElement(val slot: Int) : OutputElement()
 
 object IdentifierElement : OutputElement()
+object LabelElement : OutputElement()
 
 sealed class ConstantElement : OutputElement() {
     object IntConstantElement : ConstantElement()

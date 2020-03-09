@@ -41,6 +41,10 @@ methodBody
     : NL* LCURL NL* block? NL* RCURL
     ;
 
+switchLabel
+    : (intLiteral | DEFAULT) COLON identifier
+    ;
+
 instruction
     : (SimpleInstruction)
     | (ImmediateIntPushInstruction intLiteral)
@@ -51,6 +55,7 @@ instruction
     | (JumpInstruction identifier)
     | (IntIncrementInstruction intLiteral intLiteral?)
     | (TypeInstruction type)
+    | (TableSwitchInstruction LCURL NL* switchLabel (semi switchLabel)* NL* RCURL)
     ;
 
 label

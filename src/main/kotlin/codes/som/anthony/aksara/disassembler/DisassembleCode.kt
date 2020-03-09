@@ -11,7 +11,7 @@ import org.objectweb.asm.Type
 import org.objectweb.asm.tree.*
 
 private fun disassembleLabel(prog: AksaraASTProgram, labels: List<Label>, label: Label, output: Output) {
-    output.write("L${labels.indexOf(label)}")
+    output.write(LabelElement, "L${labels.indexOf(label)}")
 }
 
 // TODO: We should probably escape quotes too
@@ -35,9 +35,15 @@ private fun disassembleInstruction(prog: AksaraASTProgram, labels: List<Label>, 
     if (insn is LineNumberNode || insn is FrameNode)
         return
 
-    val opcodeName = opcodeNameMap.getValue(insn.opcode)
+    val opcodeName = opcodeNameMap[insn.opcode]
 
     output.begin(InstructionElement)
+
+    if (opcodeName == null) {
+        output.write("// unknown opcode ${insn.opcode}")
+        return
+    }
+
     output.write(OpcodeElement(insn.opcode), opcodeName)
 
     when (insn) {
@@ -102,7 +108,32 @@ private fun disassembleInstruction(prog: AksaraASTProgram, labels: List<Label>, 
             }
         }
 
-        // TODO: TableSwitch, LookupSwitch
+        is TableSwitchInsnNode -> {
+            output.write(" {\n")
+            output.indentLevel += 4
+
+            for ((i, label) in insn.labels.withIndex()) {
+                if (label == insn.dflt)
+                    continue
+
+                val value = IntConstantASTNode(insn.min + i)
+                output.write(ConstantElement.from(value), formatConstant(prog, value))
+                output.write(": ")
+                disassembleLabel(prog, labels, label.label, output)
+                output.write("\n")
+            }
+
+            output.write(KeywordElement.Default, "default") // TODO: What kind of highlighting do we want here?
+            output.write(": ")
+            disassembleLabel(prog, labels, insn.dflt.label, output)
+            output.write("\n")
+
+            output.indentLevel -= 4
+            output.write("}")
+        }
+
+        // TODO: LookupSwitch
+        // TODO: InvokeDynamic
 
         is IntInsnNode -> {
             output.write(" ")
@@ -110,7 +141,7 @@ private fun disassembleInstruction(prog: AksaraASTProgram, labels: List<Label>, 
             output.write(ConstantElement.from(cst), formatConstant(prog, cst))
         }
 
-        else -> output.write("// <unsupported $opcodeName>")
+        else -> output.write(" // <cannot disassemble>")
     }
 
     output.end()
@@ -119,21 +150,26 @@ private fun disassembleInstruction(prog: AksaraASTProgram, labels: List<Label>, 
 
 fun disassembleCode(prog: AksaraASTProgram, method: MethodASTNode, output: IndentedOutput) {
     val code = method.code ?: error("Method has no code!")
-    val labels = mutableListOf<Label>()
-    fun addLabel(l: Label) { if (!labels.contains(l)) labels.add(l) }
+    val labels = mutableListOf<LabelNode>()
+    fun addLabel(l: LabelNode) { if (!labels.contains(l)) labels.add(l) }
 
     for (insn in code) {
         if (insn is JumpInsnNode)
-            addLabel(insn.label.label)
+            addLabel(insn.label)
+
+        if (insn is TableSwitchInsnNode) {
+            insn.labels.forEach(::addLabel)
+            addLabel(insn.dflt)
+        }
     }
 
     method.tryCatchBlocks?.forEach { tcb ->
-        addLabel(tcb.start.label)
-        addLabel(tcb.end.label)
-        addLabel(tcb.handler.label)
+        addLabel(tcb.start)
+        addLabel(tcb.end)
+        addLabel(tcb.handler)
     }
 
     for (insn in code) {
-        disassembleInstruction(prog, labels, insn, output)
+        disassembleInstruction(prog, labels.sortedBy { code.indexOf(it) }.map { it.label }, insn, output)
     }
 }
