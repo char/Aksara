@@ -20,6 +20,11 @@ fun constantInsns() = arrayOf(
     "dconst_1" to DCONST_1
 )
 
+fun immediateIntPushInsns() = arrayOf(
+    "bipush" to BIPUSH,
+    "sipush" to SIPUSH
+)
+
 fun arrayLoadInsns() = arrayOf(
     "iaload" to IALOAD,
     "laload" to LALOAD,
@@ -191,6 +196,7 @@ fun typeInsns() = arrayOf(
 val opcodeNameToValue = mutableMapOf(
     "nop" to NOP,
     *constantInsns(),
+    *immediateIntPushInsns(),
     *arrayLoadInsns(),
     *arrayStoreInsns(),
     *stackManipulationInsns(),
